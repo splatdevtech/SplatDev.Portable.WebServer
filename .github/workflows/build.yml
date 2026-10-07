@@ -9,5 +9,6 @@ jobs:
     runs-on: windows-latest
     steps:
       - uses: actions/checkout@v4
+      - uses: microsoft/setup-msbuild@v2
       - name: build
         run: msbuild "Version 3/Piw.sln" /p:Configuration=Release /m
