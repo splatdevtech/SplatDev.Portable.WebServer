@@ -10,5 +10,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: microsoft/setup-msbuild@v2
+      - name: install .NET Framework 4.0 targeting pack
+        run: choco install netfx-4.0-devpack -y --no-progress
       - name: build
         run: msbuild "Version 3/Piw.sln" /p:Configuration=Release /m
