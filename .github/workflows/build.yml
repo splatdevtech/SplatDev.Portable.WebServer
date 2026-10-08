@@ -10,7 +10,10 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: microsoft/setup-msbuild@v2
-      - name: install .NET Framework 4.0 targeting pack
-        run: choco install netfx-4.0-devpack -y --no-progress
+      - name: build legacy source against installed .NET Framework references
+        shell: pwsh
+        run: |
+          $project = "Version 3\src\Cassini++\Cassini++.csproj"
+          (Get-Content $project -Raw) -replace '<TargetFrameworkVersion>v4.0</TargetFrameworkVersion>', '<TargetFrameworkVersion>v4.8</TargetFrameworkVersion>' | Set-Content $project
       - name: build
         run: msbuild "Version 3/Piw.sln" /p:Configuration=Release /m
