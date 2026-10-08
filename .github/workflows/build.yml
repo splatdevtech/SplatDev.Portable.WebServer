@@ -15,5 +15,8 @@ jobs:
         run: |
           $project = "Version 3\src\Cassini++\PiW.csproj"
           (Get-Content $project -Raw) -replace '<TargetFrameworkVersion>v4.0</TargetFrameworkVersion>', '<TargetFrameworkVersion>v4.8</TargetFrameworkVersion>' | Set-Content $project
+          $xml = Get-Content $project -Raw
+          $xml = [regex]::Replace($xml, '(?s)\s*<Content Include="Resources\\Bin\\redis-(?:benchmark|check-aof|check-dump|cli|server)\.exe">.*?</Content>', '')
+          Set-Content $project $xml
       - name: build
         run: msbuild "Version 3/Piw.sln" /p:Configuration=Release /m /p:BuildProjectReferences=false
