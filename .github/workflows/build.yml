@@ -13,7 +13,7 @@ jobs:
       - name: build legacy source against installed .NET Framework references
         shell: pwsh
         run: |
-          $project = "Version 3\src\Cassini++\Cassini++.csproj"
+          $project = "Version 3\Piw.sln"
           (Get-Content $project -Raw) -replace '<TargetFrameworkVersion>v4.0</TargetFrameworkVersion>', '<TargetFrameworkVersion>v4.8</TargetFrameworkVersion>' | Set-Content $project
       - name: build
         run: msbuild "Version 3/Piw.sln" /p:Configuration=Release /m
